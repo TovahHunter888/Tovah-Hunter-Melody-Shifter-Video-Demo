@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "MelodyShifter",
+    "slug": "MelodyShifter",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "melodyshifter",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.Ubiqnoir.MelodyShifter"
+    },
+    "android": {
+      "package": "com.Ubiqnoir.MelodyShifter",
+      "permissions": [
+        "com.android.vending.BILLING"
+      ]
+    },
+    "plugins": [
+      "expo-dev-client",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 180,
+          "resizeMode": "contain",
+          "backgroundColor": "#0B1F33",
+          "dark": {
+            "backgroundColor": "#0B1F33"
+          }
+        }
+      ]
+    ]
+  }
+}
