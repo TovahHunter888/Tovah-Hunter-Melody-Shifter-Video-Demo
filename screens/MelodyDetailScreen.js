@@ -1,5 +1,5 @@
 // screens/MelodyDetailScreen.js
-// MelodyShift — Melody Detail Screen
+// MelodyShifter — Melody Detail Screen
 //
 // This screen sits between the LibraryScreen and the editing flow.
 // Every tap on a library card lands here first.

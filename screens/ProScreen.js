@@ -1,5 +1,5 @@
 // screens/ProScreen.js
-// MelodyShift — Pro upgrade screen.
+// MelodyShifter — Pro upgrade screen.
 //
 // EXPO GO (REVENUECAT_ENABLED = false in useSubscription.js):
 //   Purchase and restore buttons show an informational Alert.
@@ -221,34 +221,78 @@ export default function ProScreen({ navigation }) {
   if (isPro) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.proActiveContainer}>
-          <MaterialCommunityIcons name="check-circle" size={64} color={colors.accent} />
-          <Text style={styles.proActiveTitle}>You are on Pro</Text>
-          <Text style={styles.proActiveSubtitle}>
-            All features are unlocked. Thank you for supporting MelodyShift.
+        <ScrollView contentContainerStyle = {styles.scroll} showsVerticalScrollIndicator={false}>
+          
+          {/**Close */}
+          <TouchableOpacity style={styles.closeBtn} 
+          onPress={() => navigation.goBack()}>
+           <MaterialCommunityIcons name="close" size={22} color={colors.muted} />
+          </TouchableOpacity>
+
+         {/* Pro active header */}
+         <View style={styles.headerSection}>
+          <View style={styles.proIcon}>
+            <MaterialCommunityIcons name="crown" size={36} color={colors.accent} />
+          </View>
+          <Text style={styles.proTitle}>You are on Pro</Text>
+          <Text style={styles.proSubtitle}>
+            All features are unlocked. Here is everything available to you.
           </Text>
- 
+        </View>
+        
+          {/** Active plan */}
+           <View style={styles.activePlanCard}>
+            <MaterialCommunityIcons name="check-circle-outline" size={20} color={colors.accent} />
+            <View style={{ flex: 1 }}>
+              <Text style={styles.activePlanLabel}>Active Plan</Text>
+              <Text style={styles.activePlanValue}>MelodyShifter Pro — Active</Text>
+            </View>
+          </View>
+
+          {/* Feature list. same FEATURES array, all unlocked */}
+          <View style={styles.featureList}>
+            <Text style={styles.featureListLabel}>YOUR PRO FEATURES</Text>
+            {FEATURES.map((feature, index) => (
+              <View key={index} style={styles.featureRow}>
+                <MaterialCommunityIcons
+                  name="check-circle"
+                  size={16}
+                  color={colors.accent}
+                />
+                <Text style={[styles.featureText, styles.featureTextPro]}>
+                  {feature.label}
+                </Text>
+              </View>
+            ))}
+          </View>
+
           {/* Manage Subscription — opens Customer Center */}
           <TouchableOpacity
-            style={styles.manageBtn}
+            style={styles.subscribeBtn}
             onPress={() => {
               if (REVENUECAT_ENABLED) {
                 setShowCustomerCenter(true);
               } else {
                 Alert.alert(
                   'Manage Subscription',
-                  'Subscription management will be available in the full build.'
+                  Platform.OS === 'ios'
+                    ? 'To cancel, change, or view your plan, go to Settings → Apple ID → Subscriptions.'
+                    : 'To cancel, change, or view your plan, open the Google Play Store → Profile → Payments & subscriptions → Subscriptions.',
+                  [{ text: 'Got it' }]
                 );
               }
-            }}>
-            <MaterialCommunityIcons name="cog-outline" size={16} color={colors.accent} />
-            <Text style={styles.manageBtnText}>Manage Subscription</Text>
+            }}
+            activeOpacity={0.85}>
+            <MaterialCommunityIcons name="cog-outline" size={18} color={colors.buttonText} />
+            <Text style={styles.subscribeBtnText}>Manage Subscription</Text>
           </TouchableOpacity>
- 
+          
+          {/** Go back */}
           <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-            <Text style={styles.backBtnText}>Go Back</Text>
+            <Text style={styles.backBtnText}>Back to MelodyShifter</Text>
           </TouchableOpacity>
-        </View>
+
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -409,6 +453,30 @@ const styles = StyleSheet.create({
   },
  
   // Plan cards
+  activePlanCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: colors.accentWash,
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: colors.accent,
+    width: '100%',
+  },
+  activePlanLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: colors.muted,
+    letterSpacing: 0.8,
+    marginBottom: 2,
+  },
+  activePlanValue: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.text,
+  },
   planRow: { flexDirection: 'row', gap: 12, marginBottom: 28 },
   planCard: {
     flex: 1, backgroundColor: colors.surface,

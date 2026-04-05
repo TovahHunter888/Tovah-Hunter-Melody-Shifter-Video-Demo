@@ -4,15 +4,21 @@
     "slug": "MelodyShifter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Applecon-ios-icon.png",
     "scheme": "melodyshifter",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Ubiqnoir.MelodyShifter"
+      "bundleIdentifier": "com.Ubiqnoir.MelodyShifter",
+      "buildNumber": "1"
     },
     "android": {
       "package": "com.Ubiqnoir.MelodyShifter",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-adaptive-icon.png",
+        "backgroundColor": "#0B1F33"
+      },
       "permissions": [
         "com.android.vending.BILLING"
       ]
@@ -30,7 +36,8 @@
             "backgroundColor": "#0B1F33"
           }
         }
-      ]
+      ],
+      "expo-video"
     ]
   }
 }
